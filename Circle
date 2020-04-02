@@ -1,0 +1,122 @@
+package modelo;
+
+import java.awt.Color;
+import java.awt.Graphics;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+public class Principal extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int xc; //Cordenadas del centro en x
+	private int yc; //Coordenadas del centro en y
+	private int r; //Medida del radio
+
+	public Principal() {
+  //Haciendo ventana
+		setSize(500, 500);
+		setVisible(true);
+    //Pasamos valores digitados como coordenadas
+		xc = Integer.parseInt(JOptionPane.showInputDialog("Digita la coordenada X en el centro"));
+		yc = Integer.parseInt(JOptionPane.showInputDialog("Digita la coordenada Y en el centro"));
+		r = Integer.parseInt(JOptionPane.showInputDialog("Digita el valor del radio"));
+		repaint();
+	}
+
+	public static void main(String[] args) {
+
+		new Principal();
+	}
+
+	public void generarCirculo(Graphics g, int xc, int yc, int r) {
+		// int x2=r;
+		// int y2=0;
+		g.setColor(Color.MAGENTA);
+		// g.fillRect(xc, yc, 1, 1);
+		int x = 0;
+		int y = r;
+		int p = (5 / 4) - r;
+		// int xcx=xc+x;
+		// int ycy=yc+y;
+		// int c=0;
+		// int xcy=xc+y;
+		// int ycx=yc+x;
+
+		while (x <= y) {
+
+			if (p < 0) {
+				p = p + 2 * x + 1;
+				g.fillRect(xc + x, yc + y, 1, 1);
+				g.fillRect(xc + x, yc - y, 1, 1);
+				g.fillRect(xc - x, yc + y, 1, 1);
+				g.fillRect(xc - x, yc - y, 1, 1);
+			} else {
+				p = p + 2 * (x - y) + 1;
+				y -= 1;
+				g.fillRect(xc + x, yc + y, 1, 1);
+				g.fillRect(xc + x, yc - y, 1, 1);
+				g.fillRect(xc - x, yc + y, 1, 1);
+				g.fillRect(xc - x, yc - y, 1, 1);
+			}
+			x += 1;
+
+		}
+		x = r; 
+		y = 0;
+		while (y <= x) {
+			if (p < 0) {
+				p = p + 2 * y + 1;
+				g.fillRect(xc + x, yc + y, 1, 1);
+				g.fillRect(xc + x, yc - y, 1, 1);
+				g.fillRect(xc - x, yc + y, 1, 1);
+				g.fillRect(xc - x, yc - y, 1, 1);
+			} else {
+				p = p + 2 * (y - x) + 1;
+				x -= 1;
+				g.fillRect(xc + x, yc + y, 1, 1);
+				g.fillRect(xc + x, yc - y, 1, 1);
+				g.fillRect(xc - x, yc + y, 1, 1);
+				g.fillRect(xc - x, yc - y, 1, 1);
+			}
+			y += 1;
+
+		}
+
+	}
+
+	@Override
+	public void paint(Graphics arg0) {
+		// TODO Auto-generated method 
+		super.paint(arg0);
+		generarCirculo(arg0, xc, yc, r);
+
+	}
+
+	public int getXc() {
+		return xc;
+	}
+
+	public void setXc(int xc) {
+		this.xc = xc;
+	}
+
+	public int getYc() {
+		return yc;
+	}
+
+	public void setYc(int yc) {
+		this.yc = yc;
+	}
+
+	public int getR() {
+		return r;
+	}
+
+	public void setR(int r) {
+		this.r = r;
+	}
+
+}
